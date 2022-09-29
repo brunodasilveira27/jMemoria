@@ -1,0 +1,174 @@
+/* @import */
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* gerais */
+
+* {
+
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  resize: none;
+  
+}
+
+html, body {
+
+  width: 100vw;
+  height: 100vh;
+  background-image: url('../imagens/fundo.jpeg');
+  background-size: cover;
+  background-position: center;
+  overflow-x: hidden;
+  user-select: none;
+
+}
+
+/* display */
+
+.flex {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.column {
+
+  flex-direction: column;
+
+}
+
+/* tela de jogo */
+
+.jogoHeader {
+
+  width: 80%;
+  max-width: 500px;
+  height: 60px;
+  background: #cccccc90;
+  border: 2px solid;
+  border-radius: 20px;
+
+}
+
+.jogoHeader h1 {
+
+  font-size: 15pt;
+  font-family: 'Press Start 2P', cursive;
+
+}
+
+.grid {
+
+  width: 100%;
+  max-width: 800px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin-top:  20px;
+  padding: 0 5px;
+
+}
+
+.card {
+
+  width: 100%;
+  aspect-ratio: 3/4;
+  background: #333;
+  border-radius: 20px;
+  position: relative;
+  transition: all 400ms ease;
+  transform-style: preserve-3d;
+  
+}
+
+.cardDesabilitado {
+
+  filter: saturate(0);
+  opacity: .8;
+
+}
+
+.cardFace {
+
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  border-radius: 20px;
+  position: absolute;
+  transition: .6s;
+
+}
+
+.cardFrente {
+
+   transform: rotateY(180deg);
+
+}
+
+.cardAtras {
+
+  background-image: url('../imagens/atras.jpeg');
+
+}
+
+.ativarCard {
+
+  transform: rotateY(180deg);
+
+}
+
+.jMsg {
+
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+
+}
+
+.jMsg h2 {
+
+  background: #015777;
+  color: #eee;
+  border-radius: 10px;
+  padding: 10px 40px;
+
+}
+
+#btJogar {
+
+  background: #333;
+  color: #eee;
+  border: none;
+  border-radius: 10px;
+  margin-top: 10px;
+  padding: 10px 40px;
+  transition: .3s;
+
+}
+
+#btJogar:active {
+
+  background: #ccc;
+  color: #333;
+
+}
+
+.footer {
+
+  width: 100%;
+  max-width: 800px;
+  height: 50px;
+  background: #cccccc;
+  border-radius: 20px;
+  margin-top: 20px;
+
+}
