@@ -1,0 +1,37 @@
+<!doctype html>
+  <html lang="pt-br">
+    <head>
+        <title> Sobre </title>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+            <link rel="stylesheet" href="config/css/style.css" />
+      </head>
+        <body>
+        
+            <header class="sobreHeader flex">
+                <h1>
+                    SOBRE
+                  </h1>
+              </header>
+                <div class="sobreBt flex">
+                    <button class="jogoBt" id="btVoltar"> VOLTAR </button>
+                  </div>
+                    <div class="sobreTexto">
+                        <p>
+                            Esse jogo foi feito apenas para que eu possa treinar meus poucos conhecimentos sobre HTML, CSS e JS (linguagens de desenvolvimento web). <br>
+                            O objetivo desse projeto é bem simples; criar o clássico jogo da memória. Qualquer tipo de erro não seria um espanto, mas vale lembrar também que, provavelmente,
+                            os elementos do game não ficarão responsivos (se adaptando p/com diversos tipos de tela). Bruno da Silveira. <br> Concluído em 29 de Setembro de 2022, às 23:24.
+                          </p>
+                      </div>
+        
+          <script>
+              
+              const btVoltar = document.querySelector("#btVoltar").addEventListener("click", () => {
+              
+                window.location.href = "index.html";
+              
+              });
+              
+            </script>
+      </body>
+</html>
