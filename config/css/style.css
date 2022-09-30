@@ -1,0 +1,212 @@
+/* @import */
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* gerais */
+
+* {
+
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  resize: none;
+  font-family: 'Press Start 2P', cursive;
+  
+}
+
+html, body {
+
+  width: 100vw;
+  height: 100vh;
+  background-image: url('../imagens/fundo.jpeg');
+  background-size: cover;
+  overflow-x: hidden;
+  user-select: none;
+
+}
+
+/* display */
+
+.flex {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.column {
+
+  flex-direction: column;
+
+}
+
+.none {
+
+  display: none;
+
+}
+
+/* tela de jogo */
+
+.jogoHeader, .jogoFooter {
+
+  width: 80%;
+  max-width: 800px;
+  height: 70px;
+  background: linear-gradient(80deg, #33333390, #cccccc);
+  border: 2px solid;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px 2px #00000080;
+
+}
+
+.jogoFooter {
+
+  font-size: 8pt;
+  margin-top: 20px;
+
+}
+
+.jogoHeader h1 {
+
+  font-size: 15pt;
+
+}
+
+.grid {
+
+  width: 100%;
+  max-width: 800px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin-top: 20px;
+  padding: 0 5px;
+
+}
+
+.card {
+
+  width: 100%;
+  aspect-ratio: 3/4;
+  background: #333;
+  border-radius: 10px;
+  position: relative;
+  transition: all 400ms ease;
+  transform-style: preserve-3d;
+
+}
+
+.cardFace {
+
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+  position: absolute;
+  transition: .6s;
+
+}
+
+.cardFrente {
+
+  transform: rotateY(180deg);
+
+}
+
+.cardAtras {
+
+  background-image: url('../imagens/atras.jpg');
+
+}
+
+.cardAtivado {
+
+  transform: rotateY(180deg);
+
+}
+
+.cardDesativado {
+
+  filter: saturate(0);
+  opacity: .8;
+
+}
+
+.jogoMenu {
+
+  width: 100vw;
+  height: 100vh;
+  background: #cccccc60;
+  position: absolute;
+  top: 0;
+  left: -100%;
+  transition: .3s;
+
+}
+
+.jogoMenu h2, .jogoBt {
+
+  width: 480px;
+  height: 50px;
+  background: #333;
+  color: #ccc;
+  border: none;
+  border-radius: 10px;
+  margin-top: 20px;
+  transition: .3s;
+
+}
+
+.jogoBt:active {
+
+  background: #eee;
+  color: #000;
+
+}
+
+/* tela de sobre */
+
+.sobreHeader {
+
+  width: 100%;
+  height: 60px;
+  background: linear-gradient(80deg, #33333390, #cccccc);
+  box-shadow: 2px 2px 2px 2px #00000080;
+
+}
+
+.sobreHeader button {
+
+  width: 100px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+
+}
+
+.sobreBt {
+
+  width: 100vw;
+  padding: 10px;
+  justify-content: flex-start;
+
+}
+
+.sobreBt button {
+
+  width: 200px;
+  height: 40px;
+
+}
+
+.sobreTexto {
+
+  background: #333;
+  color: #ccc;
+  padding: 10px;
+  
+}
