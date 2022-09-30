@@ -1,166 +1,181 @@
-/* script */
+/* elementos */
 
 const grid = document.querySelector(".grid");
-const jMsg = document.querySelector(".jMsg");
+const jogoMenu = document.querySelector(".jogoMenu");
 const btJogar = document.querySelector("#btJogar");
+const btSobre = document.querySelector("#btSobre");
 
-const jMemoria = {
+/* cartas disponíveis para o jogo */
 
-  cartasDisponiveis: [
+const cartasDisponiveis = [
+
+  "turma",
+  "Patrick",
+  "Lula-Molusco",
+  "Sandy",
+  "srSiriguejo",
+  "Perola",
+  "Plankton",
+  "Bob-Esponja-casa",
+  "Patrick-casa",
+  "Lula-Molusco-casa",
   
-    "Bob-Esponja-E+",
-    "Patrick",
-    "Sandy",
-    "srSiriguejo",
-    "Perola",
-    "Lula-Molusco",
-    "Plankton",
-    "Bob-Esponja-casa",
-    "Patrick-casa",
-    "Lula-Molusco-casa",
+];
+
+const comecarJogo = () => {
+
+  /* preparar cartas */
   
-  ],
-  
-  selecionadas: {
-  
-    primeira: "",
-    segunda: "",
-  
-  },
-  
-  criarCartas(carta) {
-  
-    let card = this.criarElemento("div", "card");
-    let frente = this.criarElemento("div", "cardFace cardFrente");
-    let atras = this.criarElemento("div", "cardFace cardAtras");
-    
-        frente.style.backgroundImage = `url('../config/imagens/${carta}.jpeg')`;
-    
-    grid.appendChild(card);
-    card.appendChild(frente);
-    card.appendChild(atras);
-    card.setAttribute("data-carta", carta);
-    card.addEventListener("click", ({target}) => {
-    
-      jMemoria.revelarCarta(target);
-    
-    });
-    
-  },
-  
-  revelarCarta(target) {
-  
-    if(target.parentNode.className.includes("ativarCard")) {
-    
-      return;
+  grid.textContent = "";
+  let spread = [...cartasDisponiveis, ...cartasDisponiveis];
+  let embCartas = spread.sort(() => Math.random() - 0.5);
+      embCartas.forEach((carta) => {
       
+        criarCartas(carta);
+      
+      });
+
+};
+
+const selecionadas = {
+
+  primeira: "",
+  segunda: "",
+
+};
+
+const criarCartas = (carta) => {
+
+  let card = criarElemento("div", "card");
+  let frente = criarElemento("div", "cardFace cardFrente");
+  let atras = criarElemento("div", "cardFace cardAtras");
+      
+      frente.style.backgroundImage = `url('config/imagens/${carta}.jpg')`;
+       
+      grid.appendChild(card);
+      card.appendChild(frente);
+      card.appendChild(atras);
+      
+      card.setAttribute("data-carta", carta);
+      card.addEventListener("click", ({target}) => {
+      
+        if(target.parentNode.className.includes("cardAtivado")) {
+        
+          return;
+        
+        }
+        
+        else {
+        
+          if(selecionadas.primeira == "") {
+          
+             card.classList.add("cardAtivado");
+             selecionadas.primeira = target.parentNode;
+          
+          }
+          
+          else if(selecionadas.segunda == "") {
+          
+             card.classList.add("cardAtivado");
+             selecionadas.segunda = target.parentNode;
+             verificarCartas();
+          
+          };
+        
+        };
+      
+      });
+
+};
+
+const verificarCartas = () => {
+
+  let primeiraCarta = selecionadas.primeira.getAttribute("data-carta");
+  let segundaCarta = selecionadas.segunda.getAttribute("data-carta");
+  
+    if(primeiraCarta == segundaCarta) {
+    
+       selecionadas.primeira.firstChild.classList.add("cardDesativado");
+       selecionadas.segunda.firstChild.classList.add("cardDesativado");
+       
+       selecionadas.primeira = "";
+       selecionadas.segunda = "";
+         
+         if(jogoFinalizado()) {
+         
+           setTimeout(() => {
+           
+             jogoMenu.style.left = 0;
+           
+           }, 500);
+         
+         };
+    
     }
     
     else {
     
-      if(this.selecionadas.primeira == "") {
+      setTimeout(() => {
       
-         target.parentNode.classList.add("ativarCard");
-         this.selecionadas.primeira = target.parentNode;
+        selecionadas.primeira.classList.remove("cardAtivado");
+        selecionadas.segunda.classList.remove("cardAtivado");
+        
+        selecionadas.primeira = "";
+        selecionadas.segunda = "";
       
-      }
-      
-      else if(this.selecionadas.segunda == "") {
-      
-         target.parentNode.classList.add("ativarCard");
-         this.selecionadas.segunda = target.parentNode;
-      
-      };
-      
-      this.verificarCartas();
-      
+      }, 500);
+    
     };
   
-  },
+};
+
+const jogoFinalizado = () => {
+
+  let cartasDesativadas = document.querySelectorAll(".cardDesativado");
   
-  verificarCartas() {
-  
-    let primeiraCarta = this.selecionadas.primeira.getAttribute("data-carta");
-    let segundaCarta = this.selecionadas.segunda.getAttribute("data-carta");
+    if(cartasDesativadas.length == cartasDisponiveis.length*2) {
     
-      if(primeiraCarta != "" && segundaCarta != "" && primeiraCarta == segundaCarta) {
-      
-         this.selecionadas.primeira.firstChild.classList.add("cardDesabilitado");
-         this.selecionadas.segunda.firstChild.classList.add("cardDesabilitado");
-         this.selecionadas.primeira = "";
-         this.selecionadas.segunda = "";
-         
-         if(this.jogoFinalizado()) {
-         
-            jMsg.style.display = "flex";
-         
-         };
-      
-      }
-      
-      else if(primeiraCarta != "" && segundaCarta != "" && primeiraCarta != segundaCarta) {
-      
-          setTimeout(() => {
-          
-            this.selecionadas.primeira.classList.remove("ativarCard");
-            this.selecionadas.segunda.classList.remove("ativarCard");
-            this.selecionadas.primeira = "";
-            this.selecionadas.segunda = "";
-          
-          }, 500);
-      
-      };
-  
-  },
-  
-  jogoFinalizado() {
-  
-    let cartasAbertas = document.querySelectorAll(".cardDesabilitado");
+       return true;
     
-      if(cartasAbertas.length == 20) {
-      
-        return true;
-      
-      };
-  
-  },
-    
-  criarElemento(tagHtml, classe) {
-  
-    let novoElemento = document.createElement(tagHtml, classe);
-        novoElemento.className = classe;
-        return novoElemento;
-  
-  },
+    };
+
+};
+
+const criarElemento = (tagHtml, classe) => {
+
+  let novoElemento = document.createElement(tagHtml);
+      novoElemento.className = classe;
+      return novoElemento;
 
 };
 
 /* página carregada */
- 
-const createCard = () => {
 
-  let spread = [...jMemoria.cartasDisponiveis, ...jMemoria.cartasDisponiveis];
-  
-  let embSort = spread.sort(() => Math.random() - 0.5);
-  
-  embSort.forEach((carta) => {
-    
-    jMemoria.criarCartas(carta);
-  
-  });
+window.onload = () => {
+
+/* começar o jogo */
+
+  comecarJogo();
 
 };
-
-window.onload = () => { createCard(); };
 
 if(btJogar) {
 
    btJogar.addEventListener("click", () => {
    
-     grid.textContent = "";
-     jMsg.style.display = "none";
-     createCard();
-     
-   });
+     jogoMenu.style.left = "-100%";
+     comecarJogo();
    
+   });
+
+};
+
+if(btSobre) {
+
+  btSobre.addEventListener("click", () => {
+  
+    window.location.href = "sobre.html";
+  
+  });
+
 };
